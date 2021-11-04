@@ -285,3 +285,40 @@ module.exports.fetchApplication = async function (req, res) {
     application: application,
   });
 };
+
+module.exports.createApplication = async function (req, res) {
+  // let user = await User.findOne({ _id: req.body.id });
+  check = req.body.skills;
+
+  try {
+    let application = await Application.create({
+      // applicantemail: req.body.applicantemail,
+      applicantid: req.body.applicantId,
+      applicantname: req.body.applicantname,
+      address: req.body.address,
+      phonenumber: req.body.phonenumber,
+      hours: req.body.hours,
+      dob: req.body.dob,
+      gender: req.body.gender,
+      skills: check.split(","),
+      jobname: req.body.jobname,
+      jobid: req.body.jobId,
+      manageremail: req.body.managerId,
+    });
+
+    return res.json(200, {
+      data: {
+        application: application,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Job Created!!",
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "NOT CREATED",
+    });
+  }
+};
