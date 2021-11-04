@@ -353,3 +353,35 @@ module.exports.acceptApplication = async function (req, res) {
     });
   }
 };
+
+
+module.exports.rejectApplication = async function (req, res) {
+  try {
+    let application = await Application.findById(req.body.applicationId);
+
+    application.status = "2";
+
+    application.save();
+
+    return res.json(200, {
+      message: "Application is updated Successfully",
+
+      data: {
+        //user.JSON() part gets encrypted
+
+        // token: jwt.sign(user.toJSON(), env.jwt_secret, {
+        //   expiresIn: "100000",
+        // }),
+        application,
+      },
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "Internal Server Error",
+    });
+  }
+};
+
