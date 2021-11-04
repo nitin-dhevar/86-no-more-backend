@@ -161,6 +161,32 @@ describe('Tasks API', () => {
 
     })
 
+    describe("POST /api/v1/users/create-session" , () => {
+
+        it("IT SHOULD RETURN THE USER" , (done) => {
+            const body = 
+                {email:'boss@gmail.com',
+                password:'123',
+                
+        };
+            chai.request('http://localhost:8000')
+                .post("/api/v1/users/create-session")
+                .send(body)
+               
+                .end((err,response) => {
+                    
+                    response.body.should.be.a('object');
+    
+                    console.log('*********',response.body)
+                  
+
+                done();
+
+                });
+        })
+
+    })
+
 
     
 
