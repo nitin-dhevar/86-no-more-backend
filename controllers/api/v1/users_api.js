@@ -385,3 +385,33 @@ module.exports.rejectApplication = async function (req, res) {
   }
 };
 
+
+module.exports.closeJob = async function (req, res) {
+  try {
+    let job = await Job.findById(req.body.jobId);
+
+    job.status = "1";
+
+    job.save();
+
+    return res.json(200, {
+      message: "Job is updated Successfully",
+
+      data: {
+        //user.JSON() part gets encrypted
+
+        // token: jwt.sign(user.toJSON(), env.jwt_secret, {
+        //   expiresIn: "100000",
+        // }),
+        job,
+      },
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "Internal Server Error",
+    });
+  }
+};

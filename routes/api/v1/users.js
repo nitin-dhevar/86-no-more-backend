@@ -18,5 +18,6 @@ router.get('/',usersApi.index);
 router.get('/fetchapplications',usersApi.fetchApplication);
 router.post('/acceptapplication',usersApi.acceptApplication);
 router.post('/rejectapplication',usersApi.rejectApplication);
+router.post('/closejob',usersApi.closeJob);
 
 module.exports = router;
