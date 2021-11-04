@@ -273,3 +273,15 @@ module.exports.index = async function (req, res) {
     jobs: jobs,
   });
 };
+
+module.exports.fetchApplication = async function (req, res) {
+  let application = await Application.find({}).sort("-createdAt");
+
+  //Whenever we want to send back JSON data
+
+  return res.json(200, {
+    message: "List of Applications",
+
+    application: application,
+  });
+};

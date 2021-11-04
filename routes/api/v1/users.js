@@ -15,6 +15,6 @@ router.post('/createhistory',usersApi.createHistory);
 router.get('/gethistory',usersApi.getHistory);
 router.post('/createjob',usersApi.createJob);
 router.get('/',usersApi.index);
-
+router.get('/fetchapplications',usersApi.fetchApplication);
 
 module.exports = router;
