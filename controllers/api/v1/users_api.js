@@ -147,7 +147,7 @@ module.exports.editProfile = async function (req, res) {
       user.gender = req.body.gender;
       user.dob = req.body.dob
       check = req.body.skills
-      user.skills = check.split(',');
+      user.skills = check.split(' ');
 
 
 
@@ -179,12 +179,11 @@ module.exports.editProfile = async function (req, res) {
     });
   }
 };
-
 module.exports.searchUser = async function (req, res) {
   try {
     var regex = new RegExp(req.params.name, "i");
-    
-    let users = await Food.find({ Food: regex });
+
+    let users = await Job.find({ name: regex });
 
     return res.json(200, {
       message: "The list of Searched Users",
@@ -205,6 +204,7 @@ module.exports.searchUser = async function (req, res) {
     });
   }
 };
+
 
 module.exports.getHistory = async function (req, res) {
   try {
@@ -238,7 +238,7 @@ module.exports.createJob = async function (req, res) {
     let job = await Job.create({
       name: req.body.name,
       managerid: user._id,
-      skills:check.split(','),
+      skills:check.split(' '),
       location:req.body.location,
       description:req.body.description,
       pay:req.body.pay,
