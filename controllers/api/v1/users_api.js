@@ -262,4 +262,14 @@ module.exports.createJob = async function (req, res) {
   }
 };
 
+module.exports.index = async function (req, res) {
+  let jobs = await Job.find({}).sort("-createdAt");
 
+  //Whenever we want to send back JSON data
+
+  return res.json(200, {
+    message: "List of jobs",
+
+    jobs: jobs,
+  });
+};
