@@ -140,17 +140,7 @@ module.exports.editProfile = async function (req, res) {
 
       user.name = req.body.name;
       user.password = req.body.password;
-      user.role = req.body.role;
-      user.address = req.body.address;
-      user.phonenumber = req.body.phonenumber;
-      user.hours = req.body.hours;
-      user.gender = req.body.gender;
-      user.dob = req.body.dob
-      check = req.body.skills
-      user.skills = check.split(' ');
-
-
-
+      
       user.save();
 
       return res.json(200, {
