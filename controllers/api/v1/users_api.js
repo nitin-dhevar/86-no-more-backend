@@ -4,6 +4,7 @@ const Food = require("../../../models/food");
 const History = require('../../../models/history');
 const Job = require('../../../models/job');
 const Application = require('../../../models/application');
+const Inventory = require("../../../models/inventory");
 
 
 
@@ -222,18 +223,17 @@ module.exports.getHistory = async function (req, res) {
 
 
 module.exports.createJob = async function (req, res) {
-  let user = await User.findOne({ _id: req.body.id });
-  check = req.body.skills
+  // let inventory = await Inventory.findOne({ itemname: req.body.itemname });
+  
   try {
-    let job = await Job.create({
-      name: req.body.name,
-      managerid: user._id,
-      skills:check.split(' '),
-      location:req.body.location,
-      description:req.body.description,
-      pay:req.body.pay,
-      schedule:req.body.schedule,
-
+    let job = await Inventory.create({
+      restname: req.body.restname,
+      itemname: req.body.itemname,
+      restid:req.body.id,
+      quantity:req.body.quantity,
+      costperitem:req.body.costperitem,
+      datebought:req.body.datebought,
+      dateexpired:req.body.dateexpired,
     });
 
     return res.json(200, {
@@ -254,7 +254,7 @@ module.exports.createJob = async function (req, res) {
 };
 
 module.exports.index = async function (req, res) {
-  let jobs = await Job.find({}).sort("-createdAt");
+  let jobs = await Inventory.find({}).sort("-createdAt");
 
   //Whenever we want to send back JSON data
 
