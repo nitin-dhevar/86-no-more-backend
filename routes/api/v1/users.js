@@ -20,5 +20,6 @@ router.post('/acceptapplication',usersApi.acceptApplication);
 router.post('/rejectapplication',usersApi.rejectApplication);
 router.post('/closejob',usersApi.closeJob);
 router.post('/createapplication',usersApi.createApplication);
+router.post('/edititem',usersApi.editItem);
 
 module.exports = router;
