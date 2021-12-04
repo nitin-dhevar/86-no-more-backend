@@ -5,6 +5,7 @@ const History = require('../../../models/history');
 const Job = require('../../../models/job');
 const Application = require('../../../models/application');
 const Inventory = require("../../../models/inventory");
+const Menu = require("../../../models/menu");
 
 
 
@@ -290,6 +291,36 @@ module.exports.createJob = async function (req, res) {
   }
 };
 
+module.exports.createMenu = async function (req, res) {
+  // let inventory = await Inventory.findOne({ itemname: req.body.itemname });
+  
+  try {
+    let menu = await Menu.create({
+      restname: req.body.restname,
+      menuname: req.body.menuname,
+      restid:req.body.id,
+      quantity:req.body.quantity,
+      costmenu:req.body.costmenu,
+      
+    });
+
+    return res.json(200, {
+      data: {
+        menu: menu,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Menu Created!!",
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "NOT CREATED",
+    });
+  }
+};
+
 module.exports.index = async function (req, res) {
   let jobs = await Inventory.find({}).sort("-createdAt");
 
@@ -311,6 +342,18 @@ module.exports.fetchApplication = async function (req, res) {
     message: "List of Applications",
 
     application: application,
+  });
+};
+
+module.exports.fetchMenu = async function (req, res) {
+  let menu = await Menu.find({}).sort("-createdAt");
+
+  //Whenever we want to send back JSON data
+
+  return res.json(200, {
+    message: "List of Menus",
+
+    menu: menu,
   });
 };
 

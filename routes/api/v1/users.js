@@ -21,5 +21,7 @@ router.post('/rejectapplication',usersApi.rejectApplication);
 router.post('/closejob',usersApi.closeJob);
 router.post('/createapplication',usersApi.createApplication);
 router.post('/edititem',usersApi.editItem);
+router.post('/createmenu',usersApi.createMenu);
+router.get('/fetchmenus',usersApi.fetchMenu);
 
 module.exports = router;
