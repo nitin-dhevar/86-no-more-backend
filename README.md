@@ -2,4 +2,4 @@
 
 ## This is the backend repo for the 86 No More, A Kitchen Intelligence Solution project.
 ## Please refer to the below link for the frontend repo:
-### https://github.com/urmi6899/CSC510_Group25_Project1.git
+###https://github.com/shantanu109/CSC510_Group25_Project1.git
