@@ -23,5 +23,6 @@ router.post('/createapplication',usersApi.createApplication);
 router.post('/edititem',usersApi.editItem);
 router.post('/createmenu',usersApi.createMenu);
 router.get('/fetchmenus',usersApi.fetchMenu);
+router.post('/createinventoryHistory',usersApi.createInventoryHistory);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const Job = require('../../../models/job');
 const Application = require('../../../models/application');
 const Inventory = require("../../../models/inventory");
 const Menu = require("../../../models/menu");
-
+const Inventoryhistory = require("../../../models/inventoryhistory");
 
 
 module.exports.createSession = async function (req, res) {
@@ -356,6 +356,32 @@ module.exports.fetchMenu = async function (req, res) {
 
     menu: menu,
   });
+};
+
+module.exports.createInventoryHistory = async function (req, res) {
+  // let inventory = await Inventory.findOne({ itemname: req.body.itemname });
+  
+  try {
+    let inventoryhistory = await Inventoryhistory.create({
+      itemname: req.body.itemname,
+      quantity:req.body.quantity
+    });
+    console.log(inventoryhistory);
+    return res.json(200, {
+      data: {
+        inventoryhistory: inventoryhistory,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Inventory History Created!!",
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "NOT CREATED",
+    });
+  }
 };
 
 module.exports.createApplication = async function (req, res) {
