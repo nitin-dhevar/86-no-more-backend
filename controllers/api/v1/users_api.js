@@ -322,6 +322,42 @@ module.exports.createMenu = async function (req, res) {
   }
 };
 
+odule.exports.deleteMenu = async function (req, res) {
+  try {
+    console.log("Inside delete func")
+    const menuName = req.body.id; // Get the menu ID from the request parameters
+    console.log("Menuitem "+menuName);
+    // Check if the menu item with the provided ID exists
+    const menu = await Menu.findOne({menuname: new RegExp('^'+menuName+'$', "i")});
+
+    if (!menu) {
+      return res.status(404).json({
+        message: "Menu item not found",
+        success: false,
+      });
+    }
+    console.log(menu);
+    // If the menu item exists, delete it
+    await Menu.findByIdAndRemove(menu._id);
+
+    return res.status(200).json({
+      data: {
+        menu: menu,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Menu item deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+    });
+  }
+};
+
 module.exports.index = async function (req, res) {
   let jobs = await Inventory.find({}).sort("-createdAt");
 
