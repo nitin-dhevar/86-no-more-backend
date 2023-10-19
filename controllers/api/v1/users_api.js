@@ -389,7 +389,11 @@ module.exports.fetchInventoryHistory = async function (req, res) {
   let inventoryhistory = await Inventoryhistory.find({});
   //Whenever we want to send back JSON data
 console.log(inventoryhistory);
-  
+  return res.json(200, {
+    message: "List of InventoryHistory",
+
+    inventoryhistory: inventoryhistory,
+  });
 };
 
 module.exports.createApplication = async function (req, res) {
