@@ -175,38 +175,38 @@ module.exports.editProfile = async function (req, res) {
 
 module.exports.editItem = async function (req, res) {
   
-  try {
-   
-    let inventory = await Inventory.findOne({itemname: new RegExp('^'+req.body.itemname+'$', "i")});
+    try {
+     
+      let inventory = await Inventory.findOne({itemname: new RegExp('^'+req.body.itemname+'$', "i")});
 
-    inventory.quantity = req.body.quantity;
-    
-    
-    inventory.save();
+      inventory.quantity = req.body.quantity;
+      
+      
+      inventory.save();
 
-    let inventories = await Inventory.find({}).sort("-createdAt");
+      let inventories = await Inventory.find({}).sort("-createdAt");
 
-    return res.json(200, {
-      message: "User is updated Successfully",
+      return res.json(200, {
+        message: "User is updated Successfully",
 
-      data: {
-        //user.JSON() part gets encrypted
+        data: {
+          //user.JSON() part gets encrypted
 
-        // token: jwt.sign(user.toJSON(), env.jwt_secret, {
-        //   expiresIn: "100000",
-        // }),
-        inventories,
-      },
-      success: true,
-    });
-  } catch (err) {
-    console.log(err);
+          // token: jwt.sign(user.toJSON(), env.jwt_secret, {
+          //   expiresIn: "100000",
+          // }),
+          inventories,
+        },
+        success: true,
+      });
+    } catch (err) {
+      console.log(err);
 
-    return res.json(500, {
-      message: "Internal Server Error",
-    });
-  }
-} ;
+      return res.json(500, {
+        message: "Internal Server Error",
+      });
+    }
+  } ;
   
 ;
 module.exports.searchUser = async function (req, res) {
@@ -321,6 +321,79 @@ module.exports.createMenu = async function (req, res) {
     });
   }
 };
+
+odule.exports.deleteMenu = async function (req, res) {
+  try {
+    console.log("Inside delete func")
+    const menuName = req.body.id; // Get the menu ID from the request parameters
+    console.log("Menuitem "+menuName);
+    // Check if the menu item with the provided ID exists
+    const menu = await Menu.findOne({menuname: new RegExp('^'+menuName+'$', "i")});
+
+    if (!menu) {
+      return res.status(404).json({
+        message: "Menu item not found",
+        success: false,
+      });
+    }
+    console.log(menu);
+    // If the menu item exists, delete it
+    await Menu.findByIdAndRemove(menu._id);
+
+    return res.status(200).json({
+      data: {
+        menu: menu,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Menu item deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+    });
+  }
+};
+
+module.exports.deleteInventoryItem = async function (req, res) {
+  try {
+    console.log("Inside delete func")
+    const itemName = req.body.id; // Get the menu ID from the request parameters
+    console.log("Inventory item "+itemName);
+    // Check if the item with the provided ID exists
+    const item = await Inventory.findOne({itemname: new RegExp('^'+itemName+'$', "i")});
+
+    if (!item) {
+      return res.status(404).json({
+        message: "Inventory item not found",
+        success: false,
+      });
+    }
+    console.log(item);
+    // If the item exists, delete it
+    await Inventory.findByIdAndRemove(item._id);
+
+    return res.status(200).json({
+      data: {
+        job: item,
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+      },
+      message: "Inventory item deleted successfully",
+      success: true,
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+    });
+  }
+};
+
 
 module.exports.index = async function (req, res) {
   let jobs = await Inventory.find({}).sort("-createdAt");

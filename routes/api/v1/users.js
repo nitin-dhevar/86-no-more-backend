@@ -25,5 +25,7 @@ router.post('/createmenu',usersApi.createMenu);
 router.get('/fetchmenus',usersApi.fetchMenu);
 router.post('/createinventoryHistory',usersApi.createInventoryHistory);
 router.get('/fetchinventoryHistory',usersApi.fetchInventoryHistory);
+router.post('/deleteMenu',usersApi.deleteMenu);
+router.post('/deleteInventoryItem',usersApi.deleteInventoryItem);
 
 module.exports = router;
