@@ -384,6 +384,14 @@ module.exports.createInventoryHistory = async function (req, res) {
   }
 };
 
+module.exports.fetchInventoryHistory = async function (req, res) {
+  //let inventoryhistory = await Inventoryhistory.findOne({itemname: new RegExp('^'+req.body.itemname+'$', "i")});
+  let inventoryhistory = await Inventoryhistory.find({});
+  //Whenever we want to send back JSON data
+console.log(inventoryhistory);
+  
+};
+
 module.exports.createApplication = async function (req, res) {
   // let user = await User.findOne({ _id: req.body.id });
   check = req.body.skills;
