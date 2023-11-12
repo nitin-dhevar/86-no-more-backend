@@ -322,7 +322,7 @@ module.exports.createMenu = async function (req, res) {
   }
 };
 
-odule.exports.deleteMenu = async function (req, res) {
+module.exports.deleteMenu = async function (req, res) {
   try {
     console.log("Inside delete func")
     const menuName = req.body.id; // Get the menu ID from the request parameters
