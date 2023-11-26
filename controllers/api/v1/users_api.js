@@ -180,6 +180,7 @@ module.exports.editItem = async function (req, res) {
       let inventory = await Inventory.findOne({itemname: new RegExp('^'+req.body.itemname+'$', "i")});
 
       inventory.quantity = req.body.quantity;
+      inventory.metric = req.body.metric;
       
       
       inventory.save();
@@ -268,6 +269,7 @@ module.exports.createJob = async function (req, res) {
     let job = await Inventory.create({
       restname: req.body.restname,
       itemname: req.body.itemname,
+      metric: req.body.metric,
       restid:req.body.id,
       quantity:req.body.quantity,
       costperitem:req.body.costperitem,
@@ -437,7 +439,8 @@ module.exports.createInventoryHistory = async function (req, res) {
   try {
     let inventoryhistory = await Inventoryhistory.create({
       itemname: req.body.itemname,
-      quantity:req.body.quantity
+      quantity:req.body.quantity,
+      metric:req.body.metric
     });
     console.log(inventoryhistory);
     return res.json(200, {

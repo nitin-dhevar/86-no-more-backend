@@ -9,6 +9,10 @@ const inventorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  metric: {
+    type: String,
+    required: true,
+  },
   restid:{
     type: String,
     required: true,
