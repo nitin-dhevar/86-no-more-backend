@@ -296,16 +296,18 @@ module.exports.createJob = async function (req, res) {
 
 module.exports.createMenu = async function (req, res) {
   // let inventory = await Inventory.findOne({ itemname: req.body.itemname });
-  
+  console.log(req.body);
   try {
+    const selectedProductTypesArray = req.body.selectedProductTypes.split(',');
     let menu = await Menu.create({
       restname: req.body.restname,
       menuname: req.body.menuname,
       restid:req.body.id,
       quantity:req.body.quantity,
       costmenu:req.body.costmenu,
-      
+      productTypes: selectedProductTypesArray,
     });
+
 
     return res.json(200, {
       data: {
