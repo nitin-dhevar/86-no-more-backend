@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/calorieapp_development');
+mongoose.connect('mongodb://localhost/calorieapp_development',{
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    family: 4
+})
 
 const db = mongoose.connection;
 

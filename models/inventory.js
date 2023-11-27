@@ -12,6 +12,7 @@ const inventorySchema = new mongoose.Schema({
   metric: {
     type: String,
     required: true,
+    default: "item"
   },
   restid:{
     type: String,
