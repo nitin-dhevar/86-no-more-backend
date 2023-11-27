@@ -21,7 +21,12 @@ const menuSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  
+  productTypes: [
+    {
+      type: String,
+      enum: ['Beef', 'Pork', 'Chicken', 'Milk', 'Egg', 'Vegan', 'Vegetarian', 'Glutten-Free'],
+    }
+  ],
 });
 
 const Menu = mongoose.model("Menu", menuSchema);
